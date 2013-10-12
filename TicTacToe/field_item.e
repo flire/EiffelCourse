@@ -13,7 +13,6 @@ feature {ANY}
 	X: INTEGER = 1
 	O: INTEGER = -1
 	new_constant: INTEGER = 100500
-	second_constant: INTEGER = -100500
 	empty: INTEGER = 0
 	make(initValue:INTEGER)
 		do
