@@ -52,7 +52,6 @@ feature {NONE} -- Initialization
 				end
 
 			end
-			io.put_string ("Test")
 		end
 
 end

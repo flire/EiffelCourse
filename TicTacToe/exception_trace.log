@@ -30,3 +30,4 @@ APPLICATION         make @1
 APPLICATION         root's creation                                     
 <0000000000B10418>                         Routine failure.              Exit
 -------------------------------------------------------------------------------
+Catcall detected in {EXCEPTION}.set_throwing_exception for arg#1: expected EXCEPTION but got OPERATING_SYSTEM_SIGNAL_FAILURE

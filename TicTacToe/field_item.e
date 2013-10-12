@@ -14,6 +14,8 @@ feature {ANY}
 	O: INTEGER = -1
 	empty: INTEGER = 0
 	make(initValue:INTEGER)
+		require
+			initValueIsCorrect: initValue=0 or initValue=1 or initValue=-1
 		do
 			value := initValue
 		end
@@ -27,10 +29,17 @@ feature {ANY}
 			else
 				io.put_character (' ')
 			end
+		ensure
+			valueIsNotModified: value = old value
 		end
 feature {GAME}
 	set_value(arg_value:INTEGER)
-		do
-			value := arg_value
-		end
+	require
+		valueIsCorrect: arg_value=0 or arg_value=1 or arg_value=-1
+	do
+		value := arg_value
+	end
+
+invariant
+	valueIsCorrect: value=0 or value=1 or value=-1
 end

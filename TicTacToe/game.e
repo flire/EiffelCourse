@@ -36,14 +36,25 @@ feature {ANY}
 				end
 				row:=row+1
 			end
+
+		ensure
+			gameIsNotFinished: is_finished = FALSE
+			allItemsAreEmpty:
+				across field as cursor all cursor.item.value = {FIELD_ITEM}.empty end
 		end
 	make_move(item, row, column: INTEGER): INTEGER
+		require
+			itemIsCorrect: item = {FIELD_ITEM}.x or item = {FIELD_ITEM}.o
+			rowIsCorrect: row >=1 and row <=3
+			columnIsCorrect: column >=1 and column <=3
 		do
 			field.item(row, column).value:=item
 			Result:=check_field.status
 			if Result/=is_running then
 				is_finished:=TRUE
 			end
+		ensure
+			resultIsCorrect: Result=is_running or else Result=is_won or else Result=is_filled
 		end
 	print_game_field
 		local
@@ -66,6 +77,8 @@ feature {ANY}
 				io.new_line
 			end
 			io.new_line
+		ensure
+			field = old field
 		end
 feature {NONE}
 	field: ARRAY2[FIELD_ITEM]
@@ -146,6 +159,12 @@ feature {NONE}
 			if Result.status = is_running and counter = 9 then
 				Result.status := is_filled
 			end
+		ensure
+			winnerIsAppropriateToStatus:
+				Result.status = is_won implies Result.winner /= {FIELD_ITEM}.empty
+				and
+				Result.status /= is_won implies Result.winner = {FIELD_ITEM}.empty
 		end
-
+invariant
+	fieldIsCorrect: field.width = 3 and field.height = 3
 end
