@@ -29,7 +29,7 @@ feature {NONE} -- Initialization
 			until
 				game.is_finished
 			loop
-				io.put_string ("Enter the coordinates of your move ->")
+				io.put_string ("Enter the coordinates of your move:")
 				io.read_integer
 				user_response := io.last_integer
 				user_row := user_response // 10
